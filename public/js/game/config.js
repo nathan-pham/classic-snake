@@ -1,7 +1,8 @@
+const version = 1.0
 const config = {
     resolution: {
-        width: 600,
-        height: 600
+        width: 500,
+        height: 500
     },
     color: {
         background: "#231f20",
@@ -11,3 +12,4 @@ const config = {
 }
 
 export default config
+export { version }

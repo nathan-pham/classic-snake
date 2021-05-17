@@ -2,6 +2,9 @@ import config from "./config.js"
 
 class Canvas {
     objects = []
+    state = {
+        
+    }
 
     constructor(target) {
         this.canvas = typeof target == "string" ? document.querySelector(target) : target
