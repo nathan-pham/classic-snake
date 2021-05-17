@@ -1,6 +1,6 @@
 import config from "../config.js"
 
-export default class Canvas {
+export default class Game {
     name = "canvas"
     objects = []
 
