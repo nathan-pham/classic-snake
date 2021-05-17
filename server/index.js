@@ -1,8 +1,14 @@
 const socket = require("socket.io")
 const express = require("express")
+
+const package = require("../package.json")
 const path = require("path")
 
 const app = express()
+
+app.get("/version", (req, res) => {
+    res.send(package.version)
+})
 
 app.use(express.static("public"))
 
