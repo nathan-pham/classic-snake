@@ -11,9 +11,9 @@ const config = {
         height: 500
     },
     color: {
-        background: "#231f20",
-        snake: "#c2c2c2",
-        food: "#e66916"
+        background: "#eee",
+        snake: "#DDB38C",
+        food: "#9F454B"
     },
     grid: 20
 }
