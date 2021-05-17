@@ -5,9 +5,10 @@ export default class Snake extends Object {
     type = "snake"
     dead = false
     body = []
+    color = config.color.snake
 
     render(ctx, scale) {
-        ctx.fillStyle = config.color.snake
+        ctx.fillStyle = this.color
 
         this.body.forEach(({ x, y }) => {
             ctx.fillRect(x * scale, y * scale, scale, scale)

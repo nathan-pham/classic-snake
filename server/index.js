@@ -24,12 +24,14 @@ const io = new Server(server)
 const rooms = new Manager()
 
 io.on("connection", client => {
-    const name = client.id
-    const room = new Room(createState(name))
+    client.on("create-room", () => {
+        const name = client.id
+        const room = new Room(createState(name))
+            
+        room.join(client, name)
+        room.interval(io)
+        room.keydown(client)
 
-    console.log(room.id)
-
-    room.join(client, name)
-    room.interval(io)
-    room.keydown(client)
+        rooms.add(room)
+    })
 })

@@ -1,5 +1,9 @@
 import { grid } from "./config.js"
 
+const random = (start=0, end=grid) => {
+    return Math.floor(Math.random() * (end - start))+ start
+}
+
 const createState = (name) => {
     const snake = createSnake(name)
 
@@ -9,22 +13,20 @@ const createState = (name) => {
     ]
 }
 
-const createSnake = (name) => ({
-    type: "snake",
-    name,
-    dead: false,
-    pos: { x: 3, y: 10 },
-    vel: { x: 1, y: 0 },
-    body: [
-        { x: 1, y: 10 },
-        { x: 2, y: 10 },
-        { x: 3, y: 10 }
-    ]
-})
+const createSnake = (name) => {
+    const randomPosition = { x: random(2, grid - 2), y: random(2, grid - 2) }
+    
+    return ({
+        type: "snake",
+        name,
+        dead: false,
+        pos: randomPosition,
+        vel: { x: 1, y: 0 },
+        body: [ randomPosition ]
+    })
+}
 
 const createFood = (players) => {
-    const random = () => Math.floor(Math.random() * grid)
-
     const food = {
         type: "food",
         name: "food",
