@@ -27,8 +27,14 @@ io.on("connection", client => {
     const intervalID = setInterval(() => {
         const newGameState = gameLoop(gameState)
         gameState = newGameState
-
-        client.emit("game-state", JSON.stringify(newGameState))
+        
+        const players = gameState.filter(object => object.type == "snake")
+        
+        if(players.length > 0) {
+            client.emit("game-state", JSON.stringify(gameState))
+        } else {
+            clearInterval(intervalID)
+        }
     }, 1000 / frameRate)
 
     client.on("keydown", ({ key, name }) => {
