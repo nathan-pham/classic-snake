@@ -3,11 +3,17 @@ export default class Object {
     pos = { x: 0, y: 0 }
     vel = { x: 0, y: 0 }
 
+    log = false
+
     render() {
-        console.log("empty render from", this.name)
+        if(this.log) {
+            console.log("empty render from", this.name)
+        }
     }
 
     update(objects) {
-        console.log("empty update from", this.name)
+        if(this.log) {
+            console.log("empty update from", this.name)
+        }
     }
 }

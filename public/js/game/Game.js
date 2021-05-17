@@ -26,7 +26,7 @@ export default class Game {
     }
 
     update() {
-        this.objects.forEach(object => object.update(objects))
+        this.objects.forEach(object => object.update(this.objects))
     }
 
     render() {
@@ -34,7 +34,7 @@ export default class Game {
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
         const scaledSize = config.resolution.width / config.grid
-        this.objects.forEach(object => object.render(ctx, scaledSize))
+        this.objects.forEach(object => object.render(this.ctx, scaledSize))
     }
 
     core() {

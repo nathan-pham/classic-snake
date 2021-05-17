@@ -1,6 +1,5 @@
 let fps = 60
-let frame = 0
-let interval, start, now, then, elapsed, update
+let interval, start, now, then, elapsed, update, rID
 
 const startAnimation = (loop) => {
     update = loop
@@ -13,14 +12,20 @@ const startAnimation = (loop) => {
 }
 
 const animationLoop = () => {
-    requestAnimationFrame(animationLoop)
+    try {
+        rID = requestAnimationFrame(animationLoop)
     
-    now = Date.now()
-    elapsed = now - then
+        now = Date.now()
+        elapsed = now - then
 
-    if(elapsed > interval) {
-        then = now - (elapsed % interval)
-        update(frame ++ % ( Number.MAX_SAFE_INTEGER - 1 ))
+        if(elapsed > interval) {
+            then = now - (elapsed % interval)
+            update()
+        }
+    } catch(e) {
+        cancelAnimationFrame(rID)
+        console.log(e)
+        throw new Error("failed to start animation")
     }
 }
 

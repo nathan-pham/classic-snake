@@ -8,10 +8,9 @@ export default class Snake extends Object {
     render(ctx, scale) {
         ctx.fillStyle = config.color.snake
 
-        for(const cell of this.body) {
-            const { x, y } = cell
-            ctx.fillStyle(x * scale, y * scale, scale, scale)
-        }
+        this.body.forEach(({ x, y }) => {
+            ctx.fillRect(x * scale, y * scale, scale, scale)
+        })
     }
 
     add(x, y) {

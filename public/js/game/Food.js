@@ -6,6 +6,6 @@ export default class Food extends Object {
     
     render(ctx, scale) {
         ctx.fillStyle = config.color.food
-        ctx.fillRect(this.x * scale, this.y * scale, scale, scale)
+        ctx.fillRect(this.pos.x * scale, this.pos.y * scale, scale, scale)
     }
 }
