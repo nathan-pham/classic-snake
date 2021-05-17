@@ -1,6 +1,6 @@
 const version = "1.0.0"
 
-const checkVersion = async () => {
+const versionOK = async () => {
     const fetchedVersion = await fetch("/version").then(res => res.text())
     return fetchedVersion == version
 }
@@ -19,4 +19,4 @@ const config = {
 }
 
 export default config
-export { version, checkVersion }
+export { versionOK }

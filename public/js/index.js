@@ -1,14 +1,13 @@
-import "/socket.io/socket.io.js" 
-
+import Socket from "./game/Socket.js"
 import Snake from "./game/Snake.js"
-import animate from "./animate.js"
 import Game from "./game/Game.js"
 import Food from "./game/Food.js"
 
+import animate from "./animate.js"
 
 const game = new Game("#game-canvas")
 game.resolution()
-game.keyboard()
+game.listen()
 
 const food = new Food()
 
@@ -21,3 +20,6 @@ snake.add(3, 10)
 game.add(snake)
 
 animate(() => game.core())
+
+const socket = new Socket(game)
+socket.listen()

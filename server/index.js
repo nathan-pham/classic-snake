@@ -15,3 +15,6 @@ app.use(express.static("public"))
 const server = app.listen(8080)
 const io = socket(server)
 
+io.on("connection", client => {
+    client.emit("init", { data: "test" })    
+})

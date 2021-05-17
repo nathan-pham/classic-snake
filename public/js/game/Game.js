@@ -19,7 +19,7 @@ export default class Game {
         Object.assign(this.canvas.style, config.resolution)
     }
 
-    keyboard() {
+    listen() {
         document.addEventListener("keydown", (e) => {
             console.log(e.key.toLowerCase())
         })
