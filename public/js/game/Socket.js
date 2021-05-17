@@ -2,11 +2,14 @@ import "/socket.io/socket.io.js"
 
 export default class Socket {
     ref = io()
-    id = 0
 
     listen(game, classes) {
-        this.ref.on("init", ({ id }) => {
-            this.id = id
+        this.ref.on("game-init", ({ name, roomID }) => {
+            if(name == this.ref.id) {
+                console.log("connected to room", roomID)
+            } else {
+                throw new Error("socket mismatch")
+            }
         })
 
         this.ref.on("game-state", state => {

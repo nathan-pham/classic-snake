@@ -1,60 +1,35 @@
-const socket = require("socket.io")
-const express = require("express")
+import { Server } from "socket.io"
+import express from "express"
 
-const package = require("../package.json")
-const { frameRate } = require("./config")
-const { createState, gameLoop } = require("./game")
-const path = require("path")
+import { createState, gameLoop } from "./game.js"
+import Manager from "./rooms/Manager.js"
+import Room from "./rooms/Room.js"
 
+import * as fs from "fs"
+import * as path from "path"
+import { fileURLToPath } from "url"
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const version = JSON.parse(fs.readFileSync(path.join(__dirname, "../package.json"))).version
 const app = express()
 
 app.get("/version", (req, res) => {
-    res.send(package.version)
+    res.send(version)
 })
 
 app.use(express.static("public"))
 
 const server = app.listen(8080)
-const io = socket(server)
-
+const io = new Server(server)
+const rooms = new Manager()
 
 io.on("connection", client => {
-    const id = client.id
-    client.emit("init", { id })
+    const name = client.id
+    const room = new Room(createState(name))
 
-    let gameState = createState(id)
+    console.log(room.id)
 
-    const intervalID = setInterval(() => {
-        const newGameState = gameLoop(gameState)
-        gameState = newGameState
-        
-        const players = gameState.filter(object => object.type == "snake")
-        
-        if(players.length > 0) {
-            client.emit("game-state", JSON.stringify(gameState))
-        } else {
-            clearInterval(intervalID)
-        }
-    }, 1000 / frameRate)
-
-    client.on("keydown", ({ key, name }) => {
-        const keyMap = {
-            "w": { y: -1, x: 0 },
-            "a": { x: -1, y: 0 },
-            "s": { y:  1, x: 0 },
-            "d": { x:  1, y: 0 }
-        }
-        
-        const player = gameState.filter(object => object.name === name)[0]
-
-        if(keyMap.hasOwnProperty(key) && player) {
-            Object.assign(player.vel, keyMap[key])
-            
-            gameState = gameState.filter(object => object.name !== name)
-            gameState = [
-                ...gameState,
-                player
-            ]
-        }
-    })
+    room.join(client, name)
+    room.interval(io)
+    room.keydown(client)
 })

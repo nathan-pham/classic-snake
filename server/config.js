@@ -1,4 +1,2 @@
-module.exports = {
-    frameRate: 15,
-    grid: 25
-}
+export const frameRate = 15
+export const grid = 25

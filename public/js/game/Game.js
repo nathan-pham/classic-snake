@@ -34,7 +34,7 @@ export default class Game {
         document.addEventListener("keydown", (e) => {
             this.socket.ref.emit("keydown", {
                 key: e.key.toLowerCase(),
-                name: this.socket.id
+                name: this.socket.ref.id
             })
         })
     }

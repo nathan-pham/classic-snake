@@ -1,7 +1,7 @@
-const config = require("./config")
+import { grid } from "./config.js"
 
-const createState = (id) => {
-    const snake = createSnake(id)
+const createState = (name) => {
+    const snake = createSnake(name)
 
     return [
         snake,
@@ -9,9 +9,9 @@ const createState = (id) => {
     ]
 }
 
-const createSnake = (id) => ({
+const createSnake = (name) => ({
     type: "snake",
-    name: id,
+    name,
     dead: false,
     pos: { x: 3, y: 10 },
     vel: { x: 1, y: 0 },
@@ -23,7 +23,7 @@ const createSnake = (id) => ({
 })
 
 const createFood = (players) => {
-    const random = () => Math.floor(Math.random() * config.grid)
+    const random = () => Math.floor(Math.random() * grid)
 
     const food = {
         type: "food",
@@ -59,7 +59,7 @@ const gameLoop = (_gameState=[]) => {
         player.pos.x += player.vel.x
         player.pos.y += player.vel.y
 
-        if(player.pos.x < 0 || player.pos.x > config.grid || player.pos.y < 0 || player.pos.y > config.grid) {
+        if(player.pos.x < 0 || player.pos.x > grid || player.pos.y < 0 || player.pos.y > grid) {
             player.dead = true
             return
         }
@@ -90,7 +90,7 @@ const gameLoop = (_gameState=[]) => {
     ]
 }
 
-module.exports = {
+export {
     createState,
     gameLoop
 }
