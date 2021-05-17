@@ -1,4 +1,4 @@
-const version = "1.0.0"
+const version = localStorage.getItem("version") || "1.0.0"
 
 const versionOK = async () => {
     const fetchedVersion = await fetch("/version").then(res => res.text())
@@ -11,11 +11,11 @@ const config = {
         height: 500
     },
     color: {
-        background: "#eee",
+        background: "#EEE",
         snake: "#DDB38C",
         food: "#9F454B"
     },
-    grid: 20
+    grid: 25
 }
 
 export default config
