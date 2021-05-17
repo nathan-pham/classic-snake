@@ -1,8 +1,8 @@
 import config from "../config.js"
 
-class Canvas {
+export default class Canvas {
+    name = "canvas"
     objects = []
-    state = {}
 
     constructor(target) {
         this.canvas = typeof target == "string" ? document.querySelector(target) : target
@@ -26,7 +26,7 @@ class Canvas {
     }
 
     update() {
-        this.objects.forEach(object => object.update())
+        this.objects.forEach(object => object.update(objects))
     }
 
     render() {
@@ -40,6 +40,8 @@ class Canvas {
         this.update()
         this.render()
     }
-}
 
-export default Canvas
+    add(object) {
+        this.objects.push(object)
+    }
+}
