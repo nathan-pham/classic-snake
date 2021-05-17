@@ -1,8 +1,17 @@
 import config from "../config.js"
+import Snake from "./Snake.js"
+import Food from "./Food.js"
+import Socket from "./Socket.js"
+
+const classes = {
+    food: Food,
+    snake: Snake
+}
 
 export default class Game {
     type = "game"
     objects = []
+    socket = new Socket(classes)
 
     constructor(target) {
         this.canvas = typeof target == "string" ? document.querySelector(target) : target
@@ -20,8 +29,13 @@ export default class Game {
     }
 
     listen() {
+        this.socket.listen(this, classes)
+
         document.addEventListener("keydown", (e) => {
-            console.log(e.key.toLowerCase())
+            this.socket.ref.emit("keydown", {
+                key: e.key.toLowerCase(),
+                name: this.socket.id
+            })
         })
     }
 

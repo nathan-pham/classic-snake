@@ -1,33 +1,28 @@
 import "/socket.io/socket.io.js" 
 
 export default class Socket {
-    socket = io()
-    classes = {}
-    
-    constructor(game, classes) {
-        this.game = game
-        this.classes = classes
-    }
+    ref = io()
+    id = 0
 
-    listen() {
-        this.socket.on("init", console.log)
+    listen(game, classes) {
+        this.ref.on("init", ({ id }) => {
+            this.id = id
+        })
 
-        this.socket.on("game-state", state => {
+        this.ref.on("game-state", state => {
             const serverObjects = JSON.parse(state)
             const clientObjects = []
 
             serverObjects.forEach(serverObject => {
-                const clientObject = new this.classes[serverObject.type]()
+                const clientObject = new classes[serverObject.type]()
                 Object.assign(clientObject, serverObject)
                 
                 clientObjects.push(clientObject)
             })
 
-            this.game.objects = clientObjects
+            game.objects = clientObjects
 
-            console.log(serverObjects)
-
-            requestAnimationFrame(() => this.game.core())
+            requestAnimationFrame(() => game.core())
         })
     }
 }

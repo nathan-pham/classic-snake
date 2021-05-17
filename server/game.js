@@ -1,32 +1,33 @@
 const config = require("./config")
 
-const createState = () => ([
-    { 
-        type: "snake",
-        name: "player-1",
-        dead: false,
-        pos: { x: 3, y: 10 },
-        vel: { x: 1, y: 0 },
-        body: [
-            { x: 1, y: 10 },
-            { x: 2, y: 10 },
-            { x: 3, y: 10 }
-        ]
-    },
-    {
-        type: "food",
-        pos: {
-            x: 0,
-            y: 0
-        }
-    }
-])
+const createState = (id) => {
+    const snake = createSnake(id)
 
-const randomFood = (players) => {
+    return [
+        snake,
+        createFood([ snake ])
+    ]
+}
+
+const createSnake = (id) => ({
+    type: "snake",
+    name: id,
+    dead: false,
+    pos: { x: 3, y: 10 },
+    vel: { x: 1, y: 0 },
+    body: [
+        { x: 1, y: 10 },
+        { x: 2, y: 10 },
+        { x: 3, y: 10 }
+    ]
+})
+
+const createFood = (players) => {
     const random = () => Math.floor(Math.random() * config.grid)
 
     const food = {
         type: "food",
+        name: "food",
         pos: {
             x: random(),
             y: random()
@@ -36,15 +37,19 @@ const randomFood = (players) => {
     for(const player of players) {
         for(const cell of player.body) {
             if(cell.x == food.pos.x && cell.y == food.pos.y) {
-                return randomFood(players)
+                return createFood(players)
             }
         }
     }
+
+    return food
 }
 
-const gameLoop = (gameState={}) => {
-    const players = gameState.filter(object => String(object.name).includes("player") && object.type === "snake")
-    const food = gameState.filter(object => object.type == "food" )[0] 
+const gameLoop = (_gameState=[]) => {
+    const gameState = [ ..._gameState ]
+    
+    let players = gameState.filter(object => object.type === "snake")
+    let food = gameState.filter(object => object.type === "food" )[0] 
 
     players.forEach(player => {
         if(player.dead) {
@@ -65,7 +70,7 @@ const gameLoop = (gameState={}) => {
             player.pos.x += player.vel.x
             player.pos.y += player.vel.y
             
-            food = randomFood(players)
+            food = createFood(players)
         }
 
         for(const cell of player.body) {
