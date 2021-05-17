@@ -2,6 +2,8 @@ const socket = require("socket.io")
 const express = require("express")
 
 const package = require("../package.json")
+const { frameRate } = require("./config")
+const { createState, gameLoop } = require("./game")
 const path = require("path")
 
 const app = express()
@@ -16,5 +18,11 @@ const server = app.listen(8080)
 const io = socket(server)
 
 io.on("connection", client => {
-    client.emit("init", { data: "test" })    
+    const gameState = createState()
+
+    const intervalID = setInterval(() => {
+        const newGameState = gameLoop(gameState)
+
+        client.emit("game-state", JSON.stringify(newGameState))
+    }, 1000 / frameRate)
 })

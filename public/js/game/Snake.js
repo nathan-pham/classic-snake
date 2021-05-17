@@ -2,7 +2,8 @@ import Object from "./base/Object.js"
 import config from "../config.js"
 
 export default class Snake extends Object {
-    name = "snake"
+    type = "snake"
+    dead = false
     body = []
 
     render(ctx, scale) {
