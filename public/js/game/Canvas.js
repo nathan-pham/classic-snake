@@ -1,6 +1,8 @@
 import config from "./config.js"
 
 class Canvas {
+    objects = []
+
     constructor(target) {
         this.canvas = typeof target == "string" ? document.querySelector(target) : target
 
@@ -14,6 +16,28 @@ class Canvas {
     resolution() {
         Object.assign(this.canvas, config.resolution)
         Object.assign(this.canvas.style, config.resolution)
+    }
+
+    keyboard() {
+        document.addEventListener("keydown", (e) => {
+            console.log(e.key.toLowerCase())
+        })
+    }
+
+    update() {
+        this.objects.forEach(object => object.update())
+    }
+
+    render() {
+        this.ctx.fillStyle = config.color.background
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+
+        this.objects.forEach(object => object.render())
+    }
+
+    core() {
+        this.update()
+        this.render()
     }
 }
 
