@@ -7,8 +7,8 @@ const versionOK = async () => {
 
 const config = {
     resolution: {
-        width: 500,
-        height: 500
+        width: 550,
+        height: 550
     },
     color: {
         background: "#EEE",

@@ -8,3 +8,66 @@ main .game-wrapper {
     align-items: center;
     justify-content: center;
 }
+
+.game-wrapper .join-game {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #DDB38C;
+    box-shadow: 0 0.5rem 1rem #ddb38cad;
+    border-radius: 1rem;
+    padding: 2.5rem;
+    min-width: 25rem;
+}
+
+.game-wrapper .join-game h1 {
+    margin: 0 0 1.5rem 0;
+}
+
+.game-wrapper .join-game input {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    outline: none;
+    border: none;
+    background: #fff;
+    margin: 0 0 1rem 0;
+}
+
+.game-wrapper .join-game .join-options {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+.game-wrapper .join-game .join-options button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    white-space: nowrap;
+    border-radius: 0.25rem;
+    border: none;
+    outline: none;
+    background: #fff;
+    cursor: pointer;
+    box-shadow: 0 0.35rem 0 #eee;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.game-wrapper .join-game .join-options button:hover {
+    box-shadow: 0 0 0 #eee;
+    transform: translateY(0.35rem);
+}
+
+#help {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
+
+#help ion-icon {
+    font-size: 2rem;
+}
