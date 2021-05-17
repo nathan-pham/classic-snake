@@ -33,7 +33,8 @@ export default class Game {
         this.ctx.fillStyle = config.color.background
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
-        this.objects.forEach(object => object.render())
+        const scaledSize = config.resolution.width / config.grid
+        this.objects.forEach(object => object.render(ctx, scaledSize))
     }
 
     core() {
