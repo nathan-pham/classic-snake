@@ -24,11 +24,10 @@ const io = new Server(server)
 const rooms = new Manager()
 
 io.on("connection", client => {
-    client.on("create-room", ({ username="unnamed snake" }) => {
-        console.log(username)
-
+    client.on("create-room", (data) => {
         const name = client.id
-        const room = new Room(createState(name))
+        const display = data.username
+        const room = new Room(createState({ name, display }))
             
         room.join(client, name)
         room.keydown(client)

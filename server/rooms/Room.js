@@ -57,6 +57,8 @@ export default class Room {
             const player = this.gameState.filter(object => object.name === name)[0]
 
             if(keyMap.hasOwnProperty(key) && player) {
+                // TODO: prevent backing into self
+
                 Object.assign(player.vel, keyMap[key])
                 
                 this.gameState = this.gameState.filter(object => object.name !== name)

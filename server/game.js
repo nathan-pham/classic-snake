@@ -4,20 +4,21 @@ const random = (start=0, end=grid) => {
     return Math.floor(Math.random() * (end - start))+ start
 }
 
-const createState = (name) => {
-    const snake = createSnake(name)
+const createState = ({ name, display }) => {
+    const snake = createSnake(name, display)
 
     return [
-        snake,
-        createFood([ snake ])
+        createFood([ snake ]),
+        snake
     ]
 }
 
-const createSnake = (name) => {
+const createSnake = (name, display) => {
     const randomPosition = { x: random(2, grid - 2), y: random(2, grid - 2) }
 
     return ({
         type: "snake",
+        display,
         name,
         dead: false,
         pos: randomPosition,

@@ -6,7 +6,7 @@ const gameWrapper = $(".game-wrapper")[0]
 const [ createButton, playButton ] = $(gameWrapper, "button")
 
 playButton.addEventListener("click", () => {
-    const username = $(gameWrapper, "input")[0].value
+    const username = $(gameWrapper, "input")[0].value || "unnamed snake"
 
     gameWrapper.children[0].remove()
 

@@ -24,7 +24,14 @@ const $ = (initial, selector) => {
         : initial.querySelectorAll(selector)
 }
 
+const clipText = (string="", max=13) => {
+    return string.length > max 
+        ? string.substring(0, max) + "..."
+        : string
+}
+
 export {
     h,
-    $
+    $,
+    clipText
 }

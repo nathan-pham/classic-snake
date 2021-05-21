@@ -8,6 +8,13 @@ const classes = {
     snake: Snake
 }
 
+const keyMap = {
+    "up": "w",
+    "left": "a",
+    "down": "s",
+    "right": "d"
+}
+
 export default class Game {
     type = "game"
     objects = []
@@ -32,8 +39,14 @@ export default class Game {
         this.socket.listen(this, classes)
 
         document.addEventListener("keydown", (e) => {
+            let key = e.key.toLowerCase().replace("arrow", '').trim()
+
+            if(keyMap.hasOwnProperty(key)) {
+                key = keyMap[key]
+            }
+
             this.socket.ref.emit("keydown", {
-                key: e.key.toLowerCase(),
+                key,
                 name: this.socket.ref.id
             })
         })

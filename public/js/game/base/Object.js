@@ -1,5 +1,6 @@
 export default class Object {
     name = "default-object"
+    display = "unnamed object"
     pos = { x: 0, y: 0 }
     vel = { x: 0, y: 0 }
 
