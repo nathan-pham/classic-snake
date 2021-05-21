@@ -15,14 +15,14 @@ const createState = (name) => {
 
 const createSnake = (name) => {
     const randomPosition = { x: random(2, grid - 2), y: random(2, grid - 2) }
-    
+
     return ({
         type: "snake",
         name,
         dead: false,
         pos: randomPosition,
         vel: { x: 1, y: 0 },
-        body: [ randomPosition ]
+        body: [ { ...randomPosition } ]
     })
 }
 
@@ -62,6 +62,7 @@ const gameLoop = (_gameState=[]) => {
         player.pos.y += player.vel.y
 
         if(player.pos.x < 0 || player.pos.x > grid || player.pos.y < 0 || player.pos.y > grid) {
+            console.log('died by grid')
             player.dead = true
             return
         }
@@ -75,8 +76,10 @@ const gameLoop = (_gameState=[]) => {
             food = createFood(players)
         }
 
+
         for(const cell of player.body) {
             if(cell.x == player.pos.x && cell.y == player.pos.y) {
+                console.log('died by internal collision')
                 player.dead = true
                 return
             }

@@ -28,4 +28,8 @@ export default class Socket {
             requestAnimationFrame(() => game.core())
         })
     }
+
+    join(username) {
+        this.ref.emit("create-room", { username })
+    }
 }

@@ -23,9 +23,11 @@ export default class Room {
     join(client, id) {
         this.clientIDs.push(id)
         client.join(this.id)
+
         client.emit("game-init", { name: client.id, roomID: this.id })
         client.on("disconnect", () => {
             this.clientIDs = this.clientIDs.filter(clientID => clientID !== id)
+            console.log("disconnected", id)
         })
     }
 
