@@ -5,12 +5,13 @@ import { h, $ } from "./utils.js"
 const gameWrapper = $(".game-wrapper")[0]
 const [ createButton, playButton ] = $(gameWrapper, "button")
 
-document.body.append(
-    h("div", { className: "modal" })
-)
+// document.body.append(
+//     h("div", { className: "modal" },
+//         h("")
+//     )
+// )
 
-// TODO: SPA page implementation
-// TODO: form functionality
+// TODO: game form functionality
 // TODO: help & settings modal
 
 // const game = new Game("#game-canvas")

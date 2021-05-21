@@ -63,13 +63,36 @@ main .game-wrapper {
 
 #help {
     position: fixed;
-    bottom: 1rem;
-    right: 1rem;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    display: flex;
+}
+
+#help .icon {
     cursor: pointer;
+    margin: 0 0 0 0.75rem;
+    height: 2.5em;
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.1s ease;
 }
 
 #help ion-icon {
-    font-size: 2rem;
+    font-size: 1.25rem;
 }
+
+#help .icon:hover {
+    background: #eee;
+}
+
+/*
+<div id="help">
+            <ion-icon name="settings-outline"></ion-icon>
+            <ion-icon name="help-circle-outline"></ion-icon>
+        </div>
+*/
 
 /* TODO: help & settings modal base */
