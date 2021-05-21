@@ -32,7 +32,7 @@ export default class Room {
     }
 
     revive(id) {
-        
+
     }
 
     interval(io) {
@@ -42,6 +42,9 @@ export default class Room {
 
             if(this.clientIDs.length > 0) {
                 io.in(this.id).emit("game-state", JSON.stringify(this.gameState))
+
+                // TODO: if object.dead broadcast create-modal
+                // TODO: client, if modal already in view do nothing
             } else {
                 clearInterval(this.intervalID)
                 console.log("closed room", this.id)
