@@ -7,6 +7,7 @@ export default class Socket {
         this.ref.on("game-init", ({ name, roomID }) => {
             if(name == this.ref.id) {
                 console.log("connected to room", roomID)
+                window.location.hash = roomID
             } else {
                 throw new Error("socket mismatch")
             }
@@ -29,7 +30,11 @@ export default class Socket {
         })
     }
 
-    join(username) {
+    createRoom(username) {
         this.ref.emit("create-room", { username })
+    }
+
+    joinRoom(username) {
+        this.ref.emit("join-room", { username })
     }
 }

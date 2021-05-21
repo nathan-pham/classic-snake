@@ -16,7 +16,8 @@ playButton.addEventListener("click", () => {
     const game = new Game(canvas)
     game.resolution()
     game.listen()
-    game.join(username)
+
+    game.socket.createRoom(username)
 })
 
 // playButton.

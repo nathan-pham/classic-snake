@@ -20,8 +20,4 @@ export default class Snake extends Object {
         ctx.textAlign = "center"
         ctx.fillText(clipText(this.display.trim()), this.pos.x * scale + scale / 2, this.pos.y * scale - 10)
     }
-
-    add(x, y) {
-        this.body.push({ x, y })
-    }
 }

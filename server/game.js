@@ -16,13 +16,15 @@ const createState = ({ name, display }) => {
 const createSnake = (name, display) => {
     const randomPosition = { x: random(2, grid - 2), y: random(2, grid - 2) }
 
+    const dx = randomPosition.x > grid / 2 ? -1 : 1
+
     return ({
         type: "snake",
         display,
         name,
         dead: false,
         pos: randomPosition,
-        vel: { x: 1, y: 0 },
+        vel: { x: dx, y: 0 },
         body: [ { ...randomPosition } ]
     })
 }

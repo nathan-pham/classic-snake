@@ -72,8 +72,4 @@ export default class Game {
     add(object) {
         this.objects.push(object)
     }
-
-    join(username) {
-        this.socket.join(username)
-    }
 }

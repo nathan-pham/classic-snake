@@ -31,6 +31,10 @@ export default class Room {
         })
     }
 
+    revive(id) {
+        
+    }
+
     interval(io) {
         this.intervalID = setInterval(() => {
             const newGameState = gameLoop(this.gameState)
