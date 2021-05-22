@@ -14,6 +14,9 @@ const createGame = () => {
     game.resolution()
     game.listen()
 
+    settingsButton.remove()
+    helpButton.remove()
+
     return game
 }
 
@@ -64,12 +67,30 @@ const listen = () => {
     })
 
     settingsButton.addEventListener("click", () => {
-        const modal = createModal("settings")
+        const modal = createModal("settings",
+            h("p", {}, "No settings available yet.")
+        )
         document.body.appendChild(modal)
     })
 
     helpButton.addEventListener("click", () => {
-        const modal = createModal("about")
+        const link = (title, href) => (
+            h("a", { href, target: "__blank", rel: "noreferer" }, title)
+        )
+
+        const period = () => (
+            h("span", {}, ". ")
+        )
+        
+        const modal = createModal("about",
+            h("p", {}, "classicsnake.io is a multiplayer snake game developed by ",
+                link("Nathan Pham", "https://nathanpham.me"),
+                period(),
+                "This project is open source on ",
+                link("Github", "https://github.com/nathan-pham/classic-snake"),
+                period()
+            )
+        )
         document.body.appendChild(modal)
     })
 }

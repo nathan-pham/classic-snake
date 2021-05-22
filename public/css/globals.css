@@ -1,3 +1,8 @@
+:root {
+    --p: #DDB38C;
+    --lp: #ddb38cad;
+}
+
 html, body {
     height: 100%;
     width: 100%;
@@ -60,4 +65,13 @@ button.default {
 button.default:hover {
     box-shadow: 0 0 0 var(--box-shadow-color) !important;
     transform: translateY(0.35rem);
+}
+
+a {
+    color: var(--p);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }

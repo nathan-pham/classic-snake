@@ -14,8 +14,8 @@ main .game-wrapper {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: #DDB38C;
-    box-shadow: 0 0.5rem 1rem #ddb38cad;
+    background: var(--p);
+    box-shadow: 0 0.5rem 1rem var(--lp);
     border-radius: 1rem;
     padding: 2.5rem;
     min-width: 25rem;
@@ -57,7 +57,7 @@ main .game-wrapper {
 }
 
 .modal-wrapper .modal {
-    min-width: 30rem;
+    width: 30rem;
     box-shadow: 0 0.5rem 1rem rgba(255, 255, 255, 0.5);
     background: #fff;
     border-radius: 1rem;
@@ -84,8 +84,8 @@ main .game-wrapper {
 }
 
 .modal-wrapper .modal button {
-    --box-shadow-color: #ddb38cad;
-    background: #DDB38C;
+    --box-shadow-color: var(--lp);
+    background: var(--p);
 }
 
 #room-id { 
