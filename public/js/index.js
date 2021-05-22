@@ -3,6 +3,7 @@ import Game from "./game/Game.js"
 import { h, $ } from "./utils.js"
 
 const gameWrapper = $(".game-wrapper")[0]
+const [ settingsButton, helpButton ] = $("#help .icon")
 const [ joinButton, playButton ] = $(gameWrapper, "button")
 
 const createGame = () => {
@@ -14,6 +15,20 @@ const createGame = () => {
     game.listen()
 
     return game
+}
+
+const createModal = (title, ...children) => {
+    const modal = h("div", { className: "modal-wrapper" },
+        h("div", { className: "modal" },
+            h("div", { className: "icon", onClick: () => modal.remove() },
+                h("ion-icon", { name: "close-outline" })
+            ),
+            h("h1", {}, title || "modal"),
+            ...children
+        )
+    )
+
+    return modal
 }
 
 const listen = () => {
@@ -31,18 +46,11 @@ const listen = () => {
             game.socket.joinRoom(snakeName, roomID)
         }}, "join")
 
-        const modal = h("div", { className: "modal-wrapper" },
-            h("div", { className: "modal" },
-                h("div", { className: "icon", onClick: () => modal.remove() },
-                    h("ion-icon", { name: "close-outline" })
-                ),
-                h("h1", {}, "join room"),
-                displayInput,
-                joinInput,
-                button
-            )
+        const modal = createModal("join room",
+            displayInput,
+            joinInput,
+            button
         )
-
         document.body.appendChild(modal)
     })
 
@@ -54,8 +62,16 @@ const listen = () => {
         const game = createGame()
         game.socket.createRoom(username)
     })
+
+    settingsButton.addEventListener("click", () => {
+        const modal = createModal("settings")
+        document.body.appendChild(modal)
+    })
+
+    helpButton.addEventListener("click", () => {
+        const modal = createModal("about")
+        document.body.appendChild(modal)
+    })
 }
 
 listen()
-
-// TODO: game form functionality
