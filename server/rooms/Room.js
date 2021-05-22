@@ -37,14 +37,14 @@ export default class Room {
     }
 
     revive(client) {
+        client.emit("revived")
+
         const clientID = client.id
         const display = this.gameState.filter(object => object.name == clientID)[0].display
         const newGameState = this.gameState.filter(object => object.name !== clientID)
         
         newGameState.push(createSnake(clientID, display))
         this.gameState = newGameState
-
-        client.emit("revived")
     }
 
     interval(io) {
@@ -54,9 +54,6 @@ export default class Room {
 
             if(this.clientIDs.length > 0) {
                 io.in(this.id).emit("game-state", JSON.stringify(this.gameState))
-
-                // TODO: if object.dead broadcast create-modal
-                // TODO: client, if modal already in view do nothing
             } else {
                 clearInterval(this.intervalID)
                 console.log("closed room", this.id)
