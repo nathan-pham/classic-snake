@@ -1,5 +1,5 @@
+import { h, $ } from "../utils.js"
 import config from "../config.js"
-import { $ } from "../utils.js"
 import Snake from "./Snake.js"
 import Food from "./Food.js"
 import Socket from "./Socket.js"
@@ -20,6 +20,7 @@ export default class Game {
     type = "game"
     objects = []
     socket = new Socket(classes)
+    modal = false
 
     constructor(target) {
         this.canvas = typeof target == "string" ? $(target)[0] : target
@@ -51,10 +52,39 @@ export default class Game {
                 name: this.socket.ref.id
             })
         })
+
+        this.socket.ref.on("revived", () => {
+            this.modal = false
+        })
     }
 
     update() {
-        this.objects.forEach(object => object.update(this.objects))
+        this.objects.forEach(object => {
+            object.update(this.objects)
+        
+            if(object.dead && object.name == this.socket.ref.id && !this.modal) {
+                this.modal = true
+
+                const homeButton = h("button", { className: "default", style: "margin: 0 0 1rem 0", onClick: () => {
+                    location.reload()
+                }}, "back home")
+                const replayButton = h("button", { className: "default", onClick: () => {
+                    this.socket.replay()
+                    modal.remove()
+                }}, "replay")
+            
+                const modal = h("div", { className: "modal-wrapper" },
+                    h("div", { className: "modal" },
+                        h("h1", {}, "you died"),
+                        homeButton,
+                        replayButton
+                    )
+                )
+
+                const gameWrapper = $(".game-wrapper")[0]
+                gameWrapper.appendChild(modal)
+            }
+        })
     }
 
     render() {

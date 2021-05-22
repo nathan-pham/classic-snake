@@ -1,7 +1,7 @@
 import { grid } from "./config.js"
 
 const random = (start=0, end=grid) => {
-    return Math.floor(Math.random() * (end - start))+ start
+    return Math.floor(Math.random() * (end - start)) + start
 }
 
 const createState = ({ name, display }) => {
@@ -64,7 +64,7 @@ const gameLoop = (_gameState=[]) => {
         player.pos.x += player.vel.x
         player.pos.y += player.vel.y
 
-        if(player.pos.x < 0 || player.pos.x > grid || player.pos.y < 0 || player.pos.y > grid) {
+        if(player.pos.x < 0 || player.pos.x > grid - 1|| player.pos.y < 0 || player.pos.y > grid - 1) {
             console.log('died by grid')
             player.dead = true
             return

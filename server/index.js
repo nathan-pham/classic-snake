@@ -40,14 +40,25 @@ io.on("connection", client => {
         const display = data.username || "unnamed snake"
         const roomID = data.roomID.trim()
 
-        const room = rooms.find(roomID)
+        if(roomID) {
+            const room = rooms.find(roomID)
 
-        if(room) {
-            console.log("found room")
-            console.log(room)
+            if(room) {
+                console.log("found room")
+                console.log(room)
 
-            room.join(client, client.id, display)
-            room.keydown(client)
+                room.join(client, client.id, display)
+                room.keydown(client)
+            }
+        }
+    })
+    
+    client.on("replay", (data) => {
+        const roomID = data.roomID
+        
+        if(roomID) {
+            const room = rooms.find(roomID)
+            room.revive(client)
         }
     })
 

@@ -36,6 +36,10 @@ export default class Socket {
         })
     }
 
+    replay() {
+        this.ref.emit("replay", { roomID: this.roomID })
+    }
+
     createRoom(username) {
         this.ref.emit("create-room", { username })
     }
