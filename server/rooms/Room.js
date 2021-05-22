@@ -80,10 +80,7 @@ export default class Room {
                 }
                 
                 this.gameState = this.gameState.filter(object => object.name !== name)
-                this.gameState = [
-                    ...this.gameState,
-                    player
-                ]
+                this.gameState.push(player)
             }
         })
     }

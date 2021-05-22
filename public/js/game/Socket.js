@@ -12,8 +12,9 @@ export default class Socket {
                 this.roomID = roomID
                 
                 const gameWrapper = $(".game-wrapper")[0]
-                gameWrapper.appendChild(h("span", { id: "room-id" }, `roomID: ${ roomID }`))
+                gameWrapper.appendChild(h("span", { id: "room-id" }, `join code: ${ roomID }`))
 
+                // TODO: leaderboard
             } else {
                 throw new Error("socket mismatch")
             }
