@@ -12,7 +12,11 @@ const h = (tagName="div", attributes={}, ...children) => {
     }
 
     for(const child of children) {
-        element.append(child)
+        element.appendChild(
+            typeof child == "string"
+                ? document.createTextNode(child)
+                : child
+        )
     }
 
     return element

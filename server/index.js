@@ -38,11 +38,14 @@ io.on("connection", client => {
 
     client.on("join-room", (data) => {
         const display = data.username || "unnamed snake"
-        const roomID = data.roomID
+        const roomID = data.roomID.trim()
 
         const room = rooms.find(roomID)
 
         if(room) {
+            console.log("found room")
+            console.log(room)
+
             room.join(client, client.id, display)
             room.keydown(client)
         }

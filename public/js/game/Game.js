@@ -1,4 +1,5 @@
 import config from "../config.js"
+import { $ } from "../utils.js"
 import Snake from "./Snake.js"
 import Food from "./Food.js"
 import Socket from "./Socket.js"
@@ -21,7 +22,7 @@ export default class Game {
     socket = new Socket(classes)
 
     constructor(target) {
-        this.canvas = typeof target == "string" ? document.querySelector(target) : target
+        this.canvas = typeof target == "string" ? $(target)[0] : target
 
         if(this.canvas.tagName.toLowerCase() == "canvas") {
             this.ctx = this.canvas.getContext("2d")

@@ -68,7 +68,7 @@ main .game-wrapper {
 }
 
 .modal-wrapper .modal .icon {
-    font-size: 1.25rem;
+    font-size: 1rem;
     cursor: pointer;
     position: absolute;
     top: 1rem;
@@ -88,4 +88,9 @@ main .game-wrapper {
     background: #DDB38C;
 }
 
-/* TODO: help & settings modal base */
+#room-id { 
+    font-size: 1rem;
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+}

@@ -1,4 +1,5 @@
 import "/socket.io/socket.io.js" 
+import { h, $ } from "../utils.js"
 
 export default class Socket {
     ref = io()
@@ -9,6 +10,10 @@ export default class Socket {
             if(name == this.ref.id) {
                 console.log("connected to room", roomID)
                 this.roomID = roomID
+                
+                const gameWrapper = $(".game-wrapper")[0]
+                gameWrapper.appendChild(h("span", { id: "room-id" }, `roomID: ${ roomID }`))
+
             } else {
                 throw new Error("socket mismatch")
             }

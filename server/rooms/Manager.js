@@ -5,7 +5,7 @@ export default class Manager {
         this.rooms.push(room)
     }
 
-    find(id) {
-        return this.rooms.filter(roomID => roomID == id)[0]
+    find(roomID) {
+        return this.rooms.filter(room => room.id == roomID)[0]
     }
 }
