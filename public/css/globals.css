@@ -11,3 +11,53 @@ html, body {
     box-sizing: inherit;
 }
 
+.icon {
+    cursor: pointer;
+    height: 2.5rem;
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.1s ease;
+}
+
+.icon:hover {
+    background: #eee;
+}
+
+.icon ion-icon {
+    font-size: 1.25rem;
+}
+
+input.default {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    outline: none;
+    border: none;
+    background: #fff;
+    margin: 0 0 1rem 0;
+}
+
+button.default {
+    --box-shadow-color: #eee;
+
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    white-space: nowrap;
+    border-radius: 0.25rem;
+    border: none;
+    outline: none;
+    background: #fff;
+    cursor: pointer;
+    box-shadow: 0 0.35rem 0 var(--box-shadow-color);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+button.default:hover {
+    box-shadow: 0 0 0 var(--box-shadow-color) !important;
+    transform: translateY(0.35rem);
+}

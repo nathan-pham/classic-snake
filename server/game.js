@@ -100,5 +100,6 @@ const gameLoop = (_gameState=[]) => {
 
 export {
     createState,
+    createSnake,
     gameLoop
 }

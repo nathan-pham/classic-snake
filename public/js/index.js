@@ -3,23 +3,29 @@ import Game from "./game/Game.js"
 import { h, $ } from "./utils.js"
 
 const gameWrapper = $(".game-wrapper")[0]
-const [ createButton, playButton ] = $(gameWrapper, "button")
+const [ joinButton, playButton ] = $(gameWrapper, "button")
 
-playButton.addEventListener("click", () => {
-    const username = $(gameWrapper, "input")[0].value || "unnamed snake"
+const listen = () => {
+    joinButton.addEventListener("click", () => {
+    })
 
-    gameWrapper.children[0].remove()
+    playButton.addEventListener("click", () => {
+        const username = $(gameWrapper, "input")[0].value || "unnamed snake"
 
-    const canvas = h("canvas", { id: "game-canvas" })
-    gameWrapper.append(canvas)
+        gameWrapper.children[0].remove()
 
-    const game = new Game(canvas)
-    game.resolution()
-    game.listen()
+        const canvas = h("canvas", { id: "game-canvas" })
+        gameWrapper.append(canvas)
 
-    game.socket.createRoom(username)
-})
+        const game = new Game(canvas)
+        game.resolution()
+        game.listen()
 
+        game.socket.createRoom(username)
+    })
+}
+
+listen()
 // playButton.
 
 // document.body.append(

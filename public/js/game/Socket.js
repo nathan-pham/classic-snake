@@ -2,12 +2,13 @@ import "/socket.io/socket.io.js"
 
 export default class Socket {
     ref = io()
+    roomID = "000000"
 
     listen(game, classes) {
         this.ref.on("game-init", ({ name, roomID }) => {
             if(name == this.ref.id) {
                 console.log("connected to room", roomID)
-                window.location.hash = roomID
+                this.roomID = roomID
             } else {
                 throw new Error("socket mismatch")
             }
@@ -34,7 +35,7 @@ export default class Socket {
         this.ref.emit("create-room", { username })
     }
 
-    joinRoom(username) {
-        this.ref.emit("join-room", { username })
+    joinRoom(username, roomID) {
+        this.ref.emit("join-room", { username, roomID })
     }
 }

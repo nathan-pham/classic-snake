@@ -1,4 +1,4 @@
-import { gameLoop } from "../game.js"
+import { gameLoop, createSnake } from "../game.js"
 import { frameRate } from "../config.js"
 
 const generateRoom = (length=6) => {
@@ -20,15 +20,20 @@ export default class Room {
         this.clientIDs = []
     }
 
-    join(client, id) {
+    join(client, id, display) {
         this.clientIDs.push(id)
-        client.join(this.id)
 
+        client.join(this.id)
         client.emit("game-init", { name: client.id, roomID: this.id })
+
         client.on("disconnect", () => {
             this.clientIDs = this.clientIDs.filter(clientID => clientID !== id)
             console.log("disconnected", id)
         })
+
+        if(display) {
+            this.gameState.push(createSnake(id, display))
+        }
     }
 
     revive(id) {
@@ -42,7 +47,6 @@ export default class Room {
 
             if(this.clientIDs.length > 0) {
                 io.in(this.id).emit("game-state", JSON.stringify(this.gameState))
-
                 // TODO: if object.dead broadcast create-modal
                 // TODO: client, if modal already in view do nothing
             } else {
