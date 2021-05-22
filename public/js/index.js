@@ -70,6 +70,9 @@ const listen = () => {
         const modal = createModal("settings",
             h("p", {}, "No settings available yet.")
         )
+
+        // TODO: color settings
+
         document.body.appendChild(modal)
     })
 

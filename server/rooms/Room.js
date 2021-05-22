@@ -52,6 +52,8 @@ export default class Room {
             const newGameState = gameLoop(this.gameState)
             this.gameState = newGameState
 
+            // TODO: only send across changed data
+
             if(this.clientIDs.length > 0) {
                 io.in(this.id).emit("game-state", JSON.stringify(this.gameState))
             } else {
