@@ -44,7 +44,7 @@ export default class Room {
         newGameState.push(createSnake(clientID, display))
         this.gameState = newGameState
 
-        client.emit("revive")
+        client.emit("revived")
     }
 
     interval(io) {
