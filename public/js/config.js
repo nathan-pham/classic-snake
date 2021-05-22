@@ -2,6 +2,7 @@ const version = localStorage.getItem("version") || "1.0.0"
 
 const versionOK = async () => {
     const fetchedVersion = await fetch("/version").then(res => res.text())
+    localStorage.setItem("version", fetchedVersion)
     return fetchedVersion == version
 }
 

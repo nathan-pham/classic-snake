@@ -1,6 +1,7 @@
 import "https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.esm.js"
-import Game from "./game/Game.js"
+import { versionOK } from "./config.js"
 import { h, $ } from "./utils.js"
+import Game from "./game/Game.js"
 
 const gameWrapper = $(".game-wrapper")[0]
 const [ settingsButton, helpButton ] = $("#help .icon")
@@ -98,4 +99,16 @@ const listen = () => {
     })
 }
 
-listen()
+(async function() {
+    const version = await versionOK()
+    
+    if(!version) {
+        const modal = createModal("new version",
+            h("p", {}, "A newer version of classicsnake.io is available."),
+            h("button", { className: "default", onClick: () => location.reload() }, "reload?")
+        )
+        document.body.appendChild(modal)
+    } else {
+        listen()
+    }
+})()
