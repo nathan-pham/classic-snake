@@ -55,10 +55,13 @@ io.on("connection", client => {
     
     client.on("replay", (data) => {
         const roomID = data.roomID
-        
+
         if(roomID) {
             const room = rooms.find(roomID)
-            room.revive(client)
+            
+            if(room) {
+                room.revive(client)
+            }
         }
     })
 
