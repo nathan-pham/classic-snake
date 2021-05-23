@@ -28,6 +28,8 @@ export default class Room {
 
         client.on("disconnect", () => {
             this.clientIDs = this.clientIDs.filter(clientID => clientID !== id)
+            this.gameState = this.gameState.filter(object => object.name !== id)
+            
             console.log("disconnected", id)
         })
 
