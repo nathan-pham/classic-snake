@@ -64,6 +64,4 @@ io.on("connection", client => {
             }
         }
     })
-
-    // TODO: create room w/ variable # of snakes
 })
